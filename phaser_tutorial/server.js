@@ -7,4 +7,5 @@ app.get('/', function(req, res) {
 });
 
 app.use(express.static('assets'))
+app.use(express.static('static'))
 app.listen(2000);

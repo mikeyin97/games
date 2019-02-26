@@ -159,7 +159,7 @@ var config = {
         if (pr == player){
             score += 10;
             scoreText.setText('score: ' + score);
-            if (score == 20){
+            if (score == 200){
                 endText = this.add.text(320, 250, 'P1 WINS', { fontSize: '32px', fill: '#000' });
                 score = 0;
                 score2 = 0;

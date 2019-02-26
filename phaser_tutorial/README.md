@@ -1,6 +1,6 @@
 # Phaser Tutorial
 
-A game created almost entirely by following [this tutorial](https://phaser.io/tutorials/making-your-first-phaser-3-game/index) with some minor experimental features (double jumping, multiplayer, shooting)
+I followed [this tutorial](https://phaser.io/tutorials/making-your-first-phaser-3-game/index) but I added some major experimental features (double jumping, multiplayer, shooting)
 
 To start the game:
 

@@ -41,6 +41,16 @@
     var jumps = 2;
     var jumps2 = 2;
     var endText;
+    var bullets;
+    var bullet;
+    var cooldown=20;
+    var cooldown2=20;
+    var cooldownCounter = 0;
+    var cooldownCounter2 = 0;
+    var shot2 = false;
+    var shot = false;
+    var p2dir = 'left';
+    var p1dir = 'right';
 
     var upKey2;
     var downKey2;
@@ -62,12 +72,14 @@
     function create () {
         this.add.image(400, 300, 'sky');
         cursors = this.input.keyboard.createCursorKeys();
-
+        shootKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
         upKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         downKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         leftKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         rightKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        shootKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
         enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+        
 
         //  The platforms group contains the ground and the 2 ledges we can jump on
         // Static = doesn't move, no velocity
@@ -130,6 +142,12 @@
         this.physics.add.collider(bombs, platforms);            
         this.physics.add.collider(player, bombs, hitBomb, null, this);
         this.physics.add.collider(player2, bombs, hitBomb, null, this);
+
+        bullets1 = this.physics.add.group();   
+        bullets2 = this.physics.add.group();         
+        this.physics.add.collider(player, bullets2, hitBomb, null, this);
+        this.physics.add.collider(player2, bullets1, hitBomb, null, this);
+        
         
         scoreText = this.add.text(50, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
         scoreText2 = this.add.text(580, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -142,13 +160,13 @@
 
     function hitBomb (pr, bomb){
         if (pr === player){
-            endText = this.add.text(320, 250, 'P1 LOSES', { fontSize: '32px', fill: '#000' });
+            endText = this.add.text(320, 250, 'P2 WINS', { fontSize: '32px', fill: '#000' });
+            player.setTint(0xff0000);
         } else{
-            endText = this.add.text(320, 250, 'P2 LOSES', { fontSize: '32px', fill: '#000' });
+            endText = this.add.text(320, 250, 'P1 WINS', { fontSize: '32px', fill: '#000' });
+            player2.setTint(0xff0000);
         }
         this.physics.pause();
-        player.setTint(0xff0000);
-        player.anims.play('turn');
         gameOver = true;
         
     }
@@ -160,9 +178,23 @@
         if (pr == player){
             score += 10;
             scoreText.setText('score: ' + score);
+            if (score == 200){
+                endText = this.add.text(320, 250, 'P1 WINS', { fontSize: '32px', fill: '#000' });
+                score = 0;
+                score2 = 0;
+                this.physics.pause();
+                gameOver = true;
+            }
         } else{
             score2 += 10;
             scoreText2.setText('score: ' + score2);
+            if (score2 == 200){
+                endText = this.add.text(320, 250, 'P2 WINS', { fontSize: '32px', fill: '#000' });
+                score = 0;
+                score2 = 0;
+                this.physics.pause();
+                gameOver = true;
+            }
         }
         
         if (stars.countActive(true) === 0){
@@ -180,15 +212,16 @@
     }
 
     function update () { // movement and changes    
+
         if (cursors.left.isDown) {
             player.setVelocityX(-200);
             //player.body.acceleration.x = -10;
-
+            p1dir = 'left';
             player.anims.play('left', true);
         }
         else if (cursors.right.isDown) {
             player.setVelocityX(200);
-
+            p1dir = 'right';
             player.anims.play('right', true);
         }
         else {
@@ -200,12 +233,12 @@
         if (leftKey2.isDown) {
             player2.setVelocityX(-200);
             //player2.body.acceleration.x = -10;
-
+            p2dir = 'left';
             player2.anims.play('left', true);
         }
         else if (rightKey2.isDown) {
             player2.setVelocityX(200);
-
+            p2dir = 'right'
             player2.anims.play('right', true);
         }
         else {
@@ -213,6 +246,50 @@
 
             player2.anims.play('turn');
         }
+
+        if (shot2 == true){
+            cooldownCounter2 += 1
+        }
+        if (cooldownCounter2 == cooldown2){
+            shot2 = false
+            cooldownCounter2 = 0
+        }
+        if (shot2 == false & shootKey2.isDown){
+            bullet2 = bullets2.create(player2.x, player2.y, 'bomb');
+            bullet2.setTint(0x000000);
+            if (p2dir == 'left'){
+                bullet2.setVelocityX(-300);
+                bullet2.body.acceleration.y = -300;
+            } else {
+                bullet2.setVelocityX(300);
+                bullet2.body.acceleration.y = -300;
+            }
+            
+            shot2 = true
+        }
+
+        if (shot == true){
+            cooldownCounter += 1
+        }
+        if (cooldownCounter == cooldown){
+            shot = false
+            cooldownCounter = 0
+        }
+        if (shot == false & shootKey.isDown){
+            bullet1 = bullets1.create(player.x, player.y, 'bomb');
+            if (p1dir == 'left'){
+                bullet1.setVelocityX(-300);
+                bullet1.body.acceleration.y = -300;
+            } else {
+                bullet1.setVelocityX(300);
+                bullet1.body.acceleration.y = -300;
+            }
+            
+            shot = true
+        }
+
+
+
         
         // DOUBLE JUMPING
         if (player.body.touching.down){
@@ -243,7 +320,7 @@
             downFlag2 = true
         } 
 
-        if (enterKey.isDown){
+        if (enterKey.isDown && gameOver){
             this.scene.restart();
         }
     }

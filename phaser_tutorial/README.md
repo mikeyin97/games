@@ -12,8 +12,8 @@ To start the game:
 
 
 ### Controls
-Player 1: WASD movements, F to shoot.
-Player 2: up/down/left/right movement, M to shoot. 
+Player 2: WASD movements, F to shoot.
+Player 1: up/down/left/right movement, M to shoot. 
 
 
 ### To add

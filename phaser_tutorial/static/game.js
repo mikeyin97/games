@@ -159,7 +159,7 @@ var config = {
         if (pr == player){
             score += 10;
             scoreText.setText('score: ' + score);
-            if (score == 200){
+            if (score == 20){
                 endText = this.add.text(320, 250, 'P1 WINS', { fontSize: '32px', fill: '#000' });
                 score = 0;
                 score2 = 0;
@@ -193,7 +193,6 @@ var config = {
     }
 
     function update () { // movement and changes    
-
         if (cursors.left.isDown) {
             player.setVelocityX(-200);
             //player.body.acceleration.x = -10;

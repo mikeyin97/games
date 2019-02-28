@@ -126,8 +126,8 @@ var config = {
 
         bullets1 = this.physics.add.group();   
         bullets2 = this.physics.add.group();         
-        this.physics.add.collider(player, bullets2, hitBomb, null, this);
-        this.physics.add.collider(player2, bullets1, hitBomb, null, this);
+        this.physics.add.overlap(player, bullets2, hitBomb, null, this);
+        this.physics.add.overlap(player2, bullets1, hitBomb, null, this);
         
         
         scoreText = this.add.text(50, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
@@ -148,6 +148,8 @@ var config = {
             player2.setTint(0xff0000);
         }
         this.physics.pause();
+        score = 0;
+        score2 = 0;
         gameOver = true;
         
     }

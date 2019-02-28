@@ -13,7 +13,7 @@ To start the game:
 
 ### Controls
 Player 2: WASD movements, F to shoot, G is your ultimate
-Player 1: up/down/left/right movement, M to shoot, , is your ultimate
+Player 1: up/down/left/right movement, M to shoot, , (comma) is your ultimate
 
 
 ### To add

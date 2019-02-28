@@ -1,5 +1,7 @@
 # Shoot your shot
 
+<img src="example.png" />
+
 To start the game:
 
 1) Clone the repository.

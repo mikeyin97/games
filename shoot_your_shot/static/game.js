@@ -392,6 +392,7 @@ var config = {
         } 
 
         // FAST FALL
+        
         if (!fallFlag1 & !player1.body.touching.down && cursors.down.isDown){
             player1.body.acceleration.y = 3000;
             fallFlag1 = true;

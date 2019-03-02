@@ -1,0 +1,24 @@
+{
+  "name": "games",
+  "version": "1.0.0",
+  "description": "going to start working on games",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikeyin97/games.git"
+  },
+  "author": "mike yin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mikeyin97/games/issues"
+  },
+  "homepage": "https://github.com/mikeyin97/games#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "paper": "^0.12.0",
+    "phaser": "^3.16.2"
+  }
+}

@@ -3,13 +3,16 @@ function preload(){
     this.load.image('sprite', 'sprite.png');
     this.load.image('ammo', 'ammo.png');
     this.load.image('sky', 'sky.png');
-    this.load.image('background', 'background.png');
+    this.load.image('background', 'background1.png');
     this.load.image('ground', 'bottom.png');
     this.load.image('platform', 'platforms.png');
     this.load.image('shot', 'shot.png');
-    this.load.image('dirt', 'ground.png');
+    this.load.image('dirt', 'bigground.png');
     this.load.image('textbox', 'textbox.png');
-    this.load.spritesheet('player', 'guy.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.image('tree', 'tree.png');
+    this.load.image('tree2', 'tree2.png');
+    this.load.image('sign', 'sign.png');
+    this.load.spritesheet('player', 'bigguy.png', { frameWidth: 54, frameHeight: 80 });
 }
 
 function create(){
@@ -19,42 +22,48 @@ function create(){
     count = 0
     interactFlag = false;
     interactSwitch = false;
-    this.add.image(1300, -600, 'background');
+    this.add.image(1500, -10, 'background');
     cursors = this.input.keyboard.createCursorKeys();
     interactKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
+    decorations = this.physics.add.staticGroup();
+    tree1 = decorations.create(-60, 300, 'tree');
+    tree2 = decorations.create(800, 300, 'tree2');
+    tree3 = decorations.create(1200, 300, 'tree');
+    tree2 = decorations.create(1600, 300, 'tree2');
+    sign = decorations.create(150, 430, 'sign');
     platforms = this.physics.add.staticGroup();
-    platforms.create(-200, 700, 'dirt');
-    platforms.create(100, 700, 'dirt');
-    platforms.create(400, 700, 'dirt');
-    platforms.create(700, 700, 'dirt');
-    platforms.create(1000, 700, 'dirt');
-    platforms.create(1300, 700, 'dirt');
+    platforms.create(-200, 1150, 'dirt');
+    platforms.create(100, 1150, 'dirt');
+    platforms.create(400, 1150, 'dirt');
+    platforms.create(700, 1150, 'dirt');
+    platforms.create(1000, 1150, 'dirt');
+    platforms.create(1300, 1150, 'dirt');
+    platforms.create(1600, 1150, 'dirt');
 
     textboxs = this.physics.add.staticGroup();
-
-   
-
-    textbox = textboxs.create(450, 480, 'textbox');
+    textbox = textboxs.create(670, 750, 'textbox');
     textbox.setScrollFactor(0);
     textbox.visible = false;
-    textbox.alpha = 0.5;
+    textbox.alpha = 0.8;
 
     npcs = this.physics.add.group();
-    npc1 = npcs.create(800, 400, 'sprite');
+    npc1 = npcs.create(800, 450, 'sprite');
     npc1.setBounce(0);
     npc1.setCollideWorldBounds(false);
     npc1.body.setGravityY(300);
     npc1.setTint(0x00ff00);
-    npc1.text = "HI Mike"
-    npc1.name = "Granny Yin"
+    npc1.text = "go away"
+    npc1.name = "npc"
 
     indicators = this.physics.add.group();
 
-    npc1indicator = indicators.create(npc1.x, npc1.y - 20, 'ammo');
+    npc1indicator = indicators.create(npc1.x, npc1.y - 40, 'ammo');
     npc1indicator.setGravityY(-300);
+    npc1indicator.setTint(0xff0000);
+    
 
-    npc1.profile = textboxs.create(100, 480, 'player');
+    npc1.profile = textboxs.create(100, 760, 'player');
     npc1.profile.setScrollFactor(0);
     npc1.profile.visible = false;
     //npc1.setVelocityX(-100);
@@ -69,6 +78,7 @@ function create(){
     player1.setBounce(0);
     player1.setCollideWorldBounds(false);
     player1.body.setGravityY(300);
+
     textstyle = { fontSize: '20px', fill: '#ffffff', stroke: '#ffffff', strokeThickness: 0, alpha: 0.7};
     textstyle2 = { fontSize: '25px', fill: '#ffffff', stroke: '#ffffff', strokeThickness: 0};
     this.anims.create({
@@ -97,16 +107,18 @@ function create(){
         frameRate: 20
     });  
 
-    interactText1 = this.add.text(200, 425, '', textstyle2);
-    interactText2 = this.add.text(200, 465, '', textstyle);
-    interactText3 = this.add.text(200, 490, '', textstyle);
-    
+    interactText1 = this.add.text(250, 700, '', textstyle2);
+    interactText2 = this.add.text(250, 745, '', textstyle);
+    interactText3 = this.add.text(250, 775, '', textstyle);
     this.cameras.main.startFollow(player1);
+    this.cameras.main.setFollowOffset(0, 100);
+    
     interactText1.setScrollFactor(0);
     interactText2.setScrollFactor(0);
     interactText3.setScrollFactor(0);
     this.physics.add.collider(npcs, platforms);
     this.physics.add.collider(player1, platforms);
+    this.physics.add.collider(player1, tree1);
 }
 
 function moveNPC(obj, ind, count){
@@ -219,7 +231,6 @@ function update(){
     }
     if (cursors.left.isDown) {
         player1.setVelocityX(-200);
-        
         player1.anims.play("left", true); 
         face = "left";
     }
@@ -277,8 +288,8 @@ var picture;
 
 let game = new Phaser.Game({
     type: Phaser.AUTO,
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 900,
     physics: {
         default: 'arcade',
         arcade: {

@@ -90,8 +90,8 @@ var config = {
         this.add.image(600, 450, 'background');
 
         cursors = this.input.keyboard.createCursorKeys();
-        shootKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
-        ultimateKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.COMMA);
+        shootKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.COMMA);
+        ultimateKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.PERIOD);
 
         upKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         downKey2 = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);

@@ -69,7 +69,9 @@ var config = {
     var bottom;
     var cursor;
     var shootKey, upKey2, downKey2, leftKey2, rightKey2, shootKey2, enterKey;
-
+    var bulletspeed = 1000;
+    var playerspeed = 500;
+    var ultspeed = 800;
 
     var game = new Phaser.Game(config);
 
@@ -196,11 +198,11 @@ var config = {
         // MOVEMENT    
 
         if (cursors.left.isDown) {
-            player1.setVelocityX(-200);
+            player1.setVelocityX(-1 * playerspeed);
             p1dir = 'left';
         }
         else if (cursors.right.isDown) {
-            player1.setVelocityX(200);
+            player1.setVelocityX(playerspeed);
             p1dir = 'right';
         }
         else {
@@ -208,11 +210,11 @@ var config = {
         }
 
         if (leftKey2.isDown) {
-            player2.setVelocityX(-200);
+            player2.setVelocityX(-1 * playerspeed);
             p2dir = 'left';
         }
         else if (rightKey2.isDown) {
-            player2.setVelocityX(200);
+            player2.setVelocityX(playerspeed);
             p2dir = 'right'
         }
         else {
@@ -232,10 +234,10 @@ var config = {
             bullet2 = bullets2.create(player2.x, player2.y, 'shot');
             bullet2.setTint(p2color);
             if (p2dir == 'left'){
-                bullet2.setVelocityX(-400);
+                bullet2.setVelocityX(-1 * bulletspeed);
                 bullet2.body.gravity.y = -300;
             } else {
-                bullet2.setVelocityX(400);
+                bullet2.setVelocityX(bulletspeed);
                 bullet2.body.gravity.y = -300;
             }
             p2ammo -= 1
@@ -254,10 +256,10 @@ var config = {
             bullet1 = bullets1.create(player1.x, player1.y, 'shot');
             bullet1.setTint(p1color);
             if (p1dir == 'left'){
-                bullet1.setVelocityX(-400);
+                bullet1.setVelocityX(-1 * bulletspeed);
                 bullet1.body.gravity.y = -300;
             } else {
-                bullet1.setVelocityX(400);
+                bullet1.setVelocityX(bulletspeed);
                 bullet1.body.gravity.y = -300;
             }
             p1ammo -= 1
@@ -284,26 +286,26 @@ var config = {
                 child.setTint(p2color);
             });
             if (p2dir == 'left'){
-                bullet2a.setVelocityX(-350);
+                bullet2a.setVelocityX(-ultspeed);
                 bullet2a.body.gravity.y = -300;
-                bullet2b.setVelocityX(-350);
+                bullet2b.setVelocityX(-ultspeed);
                 bullet2b.body.gravity.y = -450;
-                bullet2c.setVelocityX(-350);
+                bullet2c.setVelocityX(-ultspeed);
                 bullet2c.body.gravity.y = -600;
-                bullet2d.setVelocityX(-350);
+                bullet2d.setVelocityX(-ultspeed);
                 bullet2d.body.gravity.y = -150;
-                bullet2e.setVelocityX(-350);
+                bullet2e.setVelocityX(-ultspeed);
                 bullet2e.body.gravity.y = 0;
             } else {
-                bullet2a.setVelocityX(350);
+                bullet2a.setVelocityX(ultspeed);
                 bullet2a.body.gravity.y = -300;
-                bullet2b.setVelocityX(350);
+                bullet2b.setVelocityX(ultspeed);
                 bullet2b.body.gravity.y = -450;
-                bullet2c.setVelocityX(350);
+                bullet2c.setVelocityX(ultspeed);
                 bullet2c.body.gravity.y = -600;
-                bullet2d.setVelocityX(350);
+                bullet2d.setVelocityX(ultspeed);
                 bullet2d.body.gravity.y = -150;
-                bullet2e.setVelocityX(350);
+                bullet2e.setVelocityX(ultspeed);
                 bullet2e.body.gravity.y = 0;
             }
             p2ammo -= 5
@@ -328,26 +330,26 @@ var config = {
                 child.setTint(p1color);
             });
             if (p1dir == 'left'){
-                bullet1a.setVelocityX(-350);
+                bullet1a.setVelocityX(-ultspeed);
                 bullet1a.body.gravity.y = -300;
-                bullet1b.setVelocityX(-350);
+                bullet1b.setVelocityX(-ultspeed);
                 bullet1b.body.gravity.y = -450;
-                bullet1c.setVelocityX(-350);
+                bullet1c.setVelocityX(-ultspeed);
                 bullet1c.body.gravity.y = -600;
-                bullet1d.setVelocityX(-350);
+                bullet1d.setVelocityX(-ultspeed);
                 bullet1d.body.gravity.y = -150;
-                bullet1e.setVelocityX(-350);
+                bullet1e.setVelocityX(-ultspeed);
                 bullet1e.body.gravity.y = 0;
             } else {
-                bullet1a.setVelocityX(350);
+                bullet1a.setVelocityX(ultspeed);
                 bullet1a.body.gravity.y = -300;
-                bullet1b.setVelocityX(350);
+                bullet1b.setVelocityX(ultspeed);
                 bullet1b.body.gravity.y = -450;
-                bullet1c.setVelocityX(350);
+                bullet1c.setVelocityX(ultspeed);
                 bullet1c.body.gravity.y = -600;
-                bullet1d.setVelocityX(350);
+                bullet1d.setVelocityX(ultspeed);
                 bullet1d.body.gravity.y = -150;
-                bullet1e.setVelocityX(350);
+                bullet1e.setVelocityX(ultspeed);
                 bullet1e.body.gravity.y = 0;
             }
             p1ammo -= 5

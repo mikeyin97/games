@@ -15,6 +15,8 @@ To start the game:
 Player 2: WASD movements, F to shoot, G is your ultimate
 Player 1: up/down/left/right movement, M to shoot, , (comma) is your ultimate
 
+You can configure speeds on line 72-74 of game.js
+
 
 ### To add
 1) Online Multiplayer

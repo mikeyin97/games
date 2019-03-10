@@ -15,6 +15,6 @@ To start the game:
 
 Arrow Keys to move, Z to interact. You can interact with things that have a red diamond above them. 
 
-## Some Notes
+### Some Notes
 
 The code for this game is really bad, I definitely gotta go back and refactor some stuff in the future. 

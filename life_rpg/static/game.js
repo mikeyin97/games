@@ -12,6 +12,7 @@ function preload(){
     this.load.image('tree', 'tree.png');
     this.load.image('tree2', 'tree2.png');
     this.load.image('sign', 'sign.png');
+    this.load.image('floor', 'floor.png');
     this.load.image('stairs', 'stairs.png');
     this.load.image('stair1', 'stair1.png');
     this.load.image('stair2', 'stair2.png');
@@ -70,6 +71,7 @@ function create(){
 
     rooms = this.physics.add.staticGroup();
     rooms.create(2900, 318, 'house2');
+    rooms.create(2900, 60, 'house2');
 
     textboxs = this.physics.add.staticGroup();
     textbox = textboxs.create(670, 750, 'textbox');
@@ -83,6 +85,7 @@ function create(){
     platforms.create(3570+20, 340, 'stairs');
     platforms.create(3610+20, 310, 'stairs');
     platforms.create(3450, 260, 'platform');
+    
 
     
     textstyle = { fontSize: '20px', fill: '#ffffff', stroke: '#ffffff', strokeThickness: 0, alpha: 0.7};
@@ -216,9 +219,9 @@ function create(){
         loop: true
     });
 
-    player1 = this.physics.add.sprite(400, 300, 'player');
+    //player1 = this.physics.add.sprite(400, 300, 'player');
     //player1 = this.physics.add.sprite(1800, 300, 'player');
-    //player1 = this.physics.add.sprite(1300, 300, 'player');
+    player1 = this.physics.add.sprite(3300, 300, 'player');
     player1.setBounce(0);
     player1.setCollideWorldBounds(false);
     player1.body.setGravityY(300);
@@ -231,6 +234,7 @@ function create(){
     sep3 = decorations.create(2893, 318, 'seperator');
     sep4 = decorations.create(3383, 318, 'seperator');
     sep5 = decorations.create(3650, 318, 'seperator');
+    platforms.create(2767, 189, 'floor');
 
     interactText1 = this.add.text(250, 700, '', textstyle2);
     interactText2 = this.add.text(250, 745, '', textstyle);
